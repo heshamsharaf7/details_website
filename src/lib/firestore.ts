@@ -135,6 +135,16 @@ export interface Policy {
   order?: number;
 }
 
+export interface Developer {
+  name: string;
+  desc: string;
+  website: string;
+  facebook: string;
+  email: string;
+  phoneNo: string;
+}
+
+
 
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -297,4 +307,15 @@ export async function getPolicies(): Promise<Policy[]> {
     return [];
   }
 }
+
+// ─── Developer Info ───────────────────────────────────────────────────────────
+
+export async function getDeveloperInfo(): Promise<Developer | null> {
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'developer'));
+    if (snap.exists()) return snap.data() as Developer;
+  } catch (_) {}
+  return null;
+}
+
 
