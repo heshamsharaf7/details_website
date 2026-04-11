@@ -13,16 +13,16 @@ export default function CategoryCard({ category }: CategoryCardProps) {
       className="group flex flex-col items-center gap-3 transition-transform active:scale-95"
     >
       <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-accent border-2 border-transparent group-hover:border-primary transition-colors shadow-sm">
-        {category.imageUrl ? (
+        {(category.iconUrl || category.imageUrl) ? (
           <Image 
-            src={category.imageUrl} 
+            src={category.iconUrl || category.imageUrl || ''} 
             alt={category.name}
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-300">
-            <span className="text-4xl">📦</span>
+            <span className="text-4xl">{category.icon || '📦'}</span>
           </div>
         )}
       </div>

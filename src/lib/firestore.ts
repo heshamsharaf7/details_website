@@ -21,8 +21,10 @@ export interface Category {
   id: string;
   name: string;
   imageUrl?: string;
+  iconUrl?: string; // Matching Flutter model
   icon?: string;
 }
+
 
 export interface Banner {
   id: string;

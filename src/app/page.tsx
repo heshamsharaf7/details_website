@@ -64,20 +64,20 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex flex-col gap-12 pb-20 max-w-7xl mx-auto w-full px-4 md:px-8 mt-4">
-        <div className="h-[300px] md:h-[500px] bg-gray-100 animate-pulse rounded-[3rem]" />
+        <div className="h-[250px] md:h-[500px] bg-gray-100 animate-pulse rounded-[2.5rem] md:rounded-[3rem]" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-           <div className="h-64 bg-gray-100 animate-pulse rounded-[3rem]" />
-           <div className="h-64 bg-gray-100 animate-pulse rounded-[3rem]" />
-           <div className="h-64 bg-gray-100 animate-pulse rounded-[3rem]" />
+           <div className="h-48 bg-gray-100 animate-pulse rounded-[2rem] md:rounded-[3rem]" />
+           <div className="h-48 bg-gray-100 animate-pulse rounded-[2rem] md:rounded-[3rem]" />
+           <div className="h-48 bg-gray-100 animate-pulse rounded-[2rem] md:rounded-[3rem]" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-12 pb-20">
+    <div className="flex flex-col gap-8 md:gap-16 pb-20">
       {/* 1. Hero Slider */}
-      <section className="relative h-[300px] md:h-[500px] w-full overflow-hidden md:rounded-[3rem] max-w-7xl mx-auto md:mt-4 shadow-xl">
+      <section className="relative h-[300px] md:h-[500px] w-full overflow-hidden md:rounded-[3.5rem] max-w-7xl mx-auto md:mt-4 shadow-2xl">
         {banners.length > 0 ? (
           <>
             {banners.map((banner, index) => (
@@ -92,18 +92,18 @@ export default function Home() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-8 md:p-16">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-6 md:p-16">
                   {banner.title && (
-                    <h2 className="text-3xl md:text-5xl font-black text-white mb-4 max-w-2xl drop-shadow-lg">
+                    <h2 className="text-2xl md:text-5xl font-black text-white mb-4 max-w-2xl drop-shadow-xl leading-tight">
                       {banner.title}
                     </h2>
                   )}
                   {banner.link && (
                     <Link 
                       href={banner.link}
-                      className="btn-primary w-fit text-lg px-8 py-4"
+                      className="btn-primary w-fit text-sm md:text-lg px-6 py-3 md:px-10 md:py-4 shadow-lg shadow-primary/20"
                     >
-                      تسوق الآن
+                      تسوق الآن 
                     </Link>
                   )}
                 </div>
@@ -112,61 +112,63 @@ export default function Home() {
             
             {/* Dots */}
             {banners.length > 1 && (
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {banners.map((_, i) => (
                   <button 
                     key={i}
                     onClick={() => setCurrentBanner(i)}
-                    className={`h-1.5 rounded-full transition-all ${i === currentBanner ? 'w-8 bg-white' : 'w-2 bg-white/50'}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${i === currentBanner ? 'w-10 bg-white shadow-lg' : 'w-2 bg-white/40'}`}
                   />
                 ))}
               </div>
             )}
           </>
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-primary to-primary-dark flex flex-col items-center justify-center text-white text-center p-8">
-            <Sparkles size={64} className="mb-4 opacity-50" />
-            <h2 className="text-4xl font-black mb-2 tracking-tighter">مرحباً بك في ديتيلز</h2>
-            <p className="text-xl text-white/80 font-medium">اكتشف أحدث التفاصيل والمنتجات المختارة</p>
+          <div className="w-full h-full bg-gradient-to-br from-[#C08B7A] to-[#A67566] flex flex-col items-center justify-center text-white text-center p-8">
+            <Sparkles size={48} className="mb-4 opacity-50 md:w-16 md:h-16" />
+            <h2 className="text-2xl md:text-5xl font-black mb-2 tracking-tighter">مرحباً بك في ديتيلز</h2>
+            <p className="text-sm md:text-xl text-white/90 font-medium">اكتشف أحدث التفاصيل والمنتجات المختارة</p>
           </div>
         )}
       </section>
 
-      <div className="max-w-7xl mx-auto w-full px-4 md:px-8 space-y-20">
+      <div className="max-w-7xl mx-auto w-full px-4 md:px-8 space-y-16 md:space-y-32">
         
-        {/* 2. Packages Section (Requested at top) */}
+        {/* 2. Packages Section */}
         {packages.length > 0 && (
-          <section className="bg-zinc-900 -mx-4 px-4 py-16 md:mx-0 md:px-10 md:rounded-[3.5rem] shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <SectionHeader 
-              title="البكجات المتكاملة" 
-              subtitle="توفير أكثر مع مجموعاتنا المختارة بعناية" 
-              href="/packages"
-              isDark
-            />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {packages.slice(0, 3).map(pkg => (
-                <div key={pkg.id} className="relative group">
-                   <ProductCard item={pkg} type="package" />
-                </div>
-              ))}
+          <section className="bg-zinc-900 px-6 py-12 md:py-20 md:px-14 rounded-[3rem] md:rounded-[4rem] shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div className="relative z-10">
+              <SectionHeader 
+                title="البكجات المتكاملة" 
+                subtitle="توفير أكثر مع مجموعاتنا المختارة بعناية" 
+                href="/packages"
+                isDark
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+                {packages.slice(0, 3).map(pkg => (
+                  <ProductCard key={pkg.id} item={pkg} type="package" />
+                ))}
+              </div>
             </div>
           </section>
         )}
 
         {/* 3. Exclusive Offers */}
         {offers.length > 0 && (
-          <section className="bg-primary/5 -mx-4 px-4 py-16 md:mx-0 md:px-10 md:rounded-[3.5rem] border border-primary/10 relative">
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl"></div>
-            <SectionHeader 
-              title="عروض حصرية" 
-              subtitle="أقوى التخفيضات لفترة محدودة" 
-              href="/offers" 
-            />
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-              {offers.slice(0, 4).map(product => (
-                <ProductCard key={product.id} item={product} />
-              ))}
+          <section className="bg-primary/5 px-6 py-12 md:py-20 md:px-14 rounded-[3rem] md:rounded-[4rem] border border-primary/10 relative overflow-hidden">
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="relative z-10">
+              <SectionHeader 
+                title="عروض حصرية" 
+                subtitle="أقوى التخفيضات لفترة محدودة" 
+                href="/offers" 
+              />
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
+                {offers.slice(0, 4).map(product => (
+                  <ProductCard key={product.id} item={product} />
+                ))}
+              </div>
             </div>
           </section>
         )}
@@ -174,7 +176,7 @@ export default function Home() {
         {/* 4. Categories Section */}
         <section>
           <SectionHeader title="تسوق بالأقسام" subtitle="تصفح تشكيلة واسعة من الفئات" />
-          <div className="flex gap-4 overflow-x-auto pb-6 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-6 lg:grid-cols-8">
+          <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar md:grid md:grid-cols-6 lg:grid-cols-8 md:gap-8">
             {categories.map(cat => (
               <CategoryCard key={cat.id} category={cat} />
             ))}
@@ -188,7 +190,7 @@ export default function Home() {
             subtitle="آخر الموضات والمنتجات المميزة" 
             href="/products" 
           />
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10">
             {latest.map(product => (
               <ProductCard key={product.id} item={product} />
             ))}
@@ -196,32 +198,32 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 py-16 border-t border-gray-100">
-           <div className="flex flex-col items-center text-center gap-4 group">
-             <div className="w-20 h-20 rounded-[2rem] bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-primary/5">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 py-16 md:py-24 border-t border-gray-100">
+           <div className="flex flex-col items-center text-center gap-5 group">
+             <div className="w-20 h-20 rounded-[2.5rem] bg-gray-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-gray-100/50">
                <ShoppingBag size={32} />
              </div>
              <div className="space-y-2">
                 <h3 className="font-black text-xl">توصيل سريع</h3>
-                <p className="text-gray-400 text-sm font-medium leading-relaxed">نضمن لك وصول طلبك في أسرع وقت ممكن لباب بيتك بكافة المحافظات</p>
+                <p className="text-gray-400 text-sm font-medium leading-relaxed max-w-xs">نضمن لك وصول طلبك في أسرع وقت لباب بيتك بكافة المحافظات</p>
              </div>
            </div>
-           <div className="flex flex-col items-center text-center gap-4 group">
-             <div className="w-20 h-20 rounded-[2rem] bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-primary/5">
+           <div className="flex flex-col items-center text-center gap-5 group">
+             <div className="w-20 h-20 rounded-[2.5rem] bg-gray-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-gray-100/50">
                <Tag size={32} />
              </div>
              <div className="space-y-2">
                 <h3 className="font-black text-xl">أفضل الأسعار</h3>
-                <p className="text-gray-400 text-sm font-medium leading-relaxed">عروض حصرية وأسعار تنافسية مدروسة بعناية لتناسب ميزانيتك</p>
+                <p className="text-gray-400 text-sm font-medium leading-relaxed max-w-xs">عروض حصرية وأسعار تنافسية مدروسة بعناية لتناسب ميزانيتك</p>
              </div>
            </div>
-           <div className="flex flex-col items-center text-center gap-4 group">
-             <div className="w-20 h-20 rounded-[2rem] bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-primary/5">
+           <div className="flex flex-col items-center text-center gap-5 group">
+             <div className="w-20 h-20 rounded-[2.5rem] bg-gray-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-xl shadow-gray-100/50">
                <Sparkles size={32} />
              </div>
              <div className="space-y-2">
                 <h3 className="font-black text-xl">جودة مضمونة</h3>
-                <p className="text-gray-400 text-sm font-medium leading-relaxed">كافة منتجاتنا أصلية وتخضع لمراقبة جودة صارمة قبل الشحن</p>
+                <p className="text-gray-400 text-sm font-medium leading-relaxed max-w-xs">كافة منتجاتنا أصلية وتخضع لمراقبة جودة صارمة قبل الشحن</p>
              </div>
            </div>
         </section>
@@ -230,5 +232,3 @@ export default function Home() {
     </div>
   );
 }
-
-
