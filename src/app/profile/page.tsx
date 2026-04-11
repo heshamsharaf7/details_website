@@ -119,7 +119,7 @@ export default function ProfilePage() {
               <div className="space-y-4 pt-4 border-t border-white/10">
                  <div className="flex items-center gap-4 text-xs opacity-70 font-bold">
                     <Phone size={16} className="text-primary" />
-                    <span>{settings.phone || 'غير متوفر'}</span>
+                    <span>{settings.supportPhone || 'غير متوفر'}</span>
                  </div>
                  <div className="flex items-center gap-4 text-xs opacity-70 font-bold">
                     <MapPin size={16} className="text-primary" />
