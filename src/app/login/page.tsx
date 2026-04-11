@@ -59,20 +59,17 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white rounded-[3rem] shadow-2xl shadow-primary/5 overflow-hidden border border-gray-100 relative z-10 p-10 md:p-14 text-center">
         
         {/* Logo Area */}
-        <div className="mb-12 space-y-6">
-          {settings?.logoUrl ? (
-            <div className="relative w-24 h-24 mx-auto">
-               <Image src={settings.logoUrl} alt={settings.storeName || 'Logo'} fill className="object-contain" />
+        <div className="text-center mb-10 space-y-4">
+          {(settings?.app_logo || settings?.logoUrl) ? (
+            <div className="relative w-20 h-20 mx-auto">
+               <Image src={settings.app_logo || settings.logoUrl || ''} alt={settings.storeName || 'Logo'} fill className="object-contain" />
             </div>
           ) : (
-            <h1 className="text-4xl font-black text-primary tracking-tighter uppercase mb-2">Details</h1>
+            <h1 className="text-4xl font-black text-primary tracking-tighter uppercase">Details</h1>
           )}
-          <div className="space-y-2">
-            <h2 className="text-2xl font-black text-gray-800">مرحباً بك</h2>
-            <p className="text-gray-400 font-bold text-sm leading-relaxed">
-              سجل دخولك بلمسة واحدة لتبدأ تجربة ديتيلز
-            </p>
-          </div>
+          <p className="text-gray-500 font-black font-cairo text-sm leading-relaxed">
+            سجل دخولك بلمسة واحدة <br/> لتبدأ تجربة ديتيلز
+          </p>
         </div>
 
         {error && (

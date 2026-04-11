@@ -26,10 +26,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
         <div className="flex items-center gap-4 md:gap-10">
           <Link href="/" className="flex items-center gap-2 group">
-            {settings?.logoUrl ? (
+            {(settings?.app_logo || settings?.logoUrl) ? (
               <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden">
                 <Image 
-                  src={settings.logoUrl} 
+                  src={settings.app_logo || settings.logoUrl || ''} 
                   alt={settings.storeName || 'Logo'} 
                   fill 
                   className="object-contain"

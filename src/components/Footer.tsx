@@ -24,6 +24,8 @@ export default function Footer() {
 
   if (!settings) return null;
 
+  const logoToUse = settings.app_logo || settings.logoUrl;
+
   return (
     <footer className="bg-zinc-900 text-white pt-20 pb-8 mt-20 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
@@ -33,9 +35,9 @@ export default function Footer() {
           {/* Brand & Description */}
           <div className="space-y-6">
             <Link href="/" className="inline-block transform hover:scale-105 transition-transform duration-300">
-               {settings.logoUrl ? (
+               {logoToUse ? (
                  <div className="relative w-20 h-20 md:w-24 md:h-24">
-                   <Image src={settings.logoUrl} alt={settings.storeName || 'Logo'} fill className="object-contain" />
+                   <Image src={logoToUse} alt={settings.storeName || 'Logo'} fill className="object-contain" />
                  </div>
                ) : (
                  <span className="text-3xl font-black text-primary tracking-tighter uppercase">{settings.storeName || 'DETAILS'}</span>

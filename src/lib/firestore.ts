@@ -124,7 +124,9 @@ export interface StoreSettings {
   storePolicies?: string;
   website?: string;
   logoUrl?: string;
+  app_logo?: string; // New field mentioned by user
 }
+
 
 
 export interface Policy {
