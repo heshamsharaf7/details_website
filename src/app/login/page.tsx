@@ -152,7 +152,7 @@ export default function LoginPage() {
                 </div>
 
                 <div className="flex justify-between items-center px-1">
-                   <Link href="/forgot-password" ** **className="text-[10px] font-black text-primary hover:underline">
+                   <Link href="/forgot-password" title="نسيت كلمة المرور؟" className="text-[10px] font-black text-primary hover:underline">
                       نسيت كلمة المرور؟
                    </Link>
                 </div>
