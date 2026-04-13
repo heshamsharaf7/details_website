@@ -52,13 +52,14 @@ export default function LoginPage() {
         
         {/* Logo Area */}
         <div className="text-center mb-10 space-y-4">
-          {(settings?.app_logo || settings?.logoUrl) ? (
-            <div className="relative w-20 h-20 mx-auto">
-               <Image src={settings.app_logo || settings.logoUrl || ''} alt={settings.storeName || 'Logo'} fill className="object-contain" />
-            </div>
-          ) : (
-            <h1 className="text-4xl font-black text-primary tracking-tighter uppercase">Details</h1>
-          )}
+          <div className="relative w-24 h-24 mx-auto mb-6">
+             <Image 
+               src={settings?.app_logo || settings?.logoUrl || '/app_logo.jpeg'} 
+               alt={settings?.storeName || 'Logo'} 
+               fill 
+               className="object-contain" 
+             />
+          </div>
           <p className="text-gray-500 font-black font-cairo text-sm leading-relaxed">
             سجل دخولك بلمسة واحدة <br/> لتبدأ تجربة ديتيلز
           </p>
