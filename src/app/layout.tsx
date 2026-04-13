@@ -6,6 +6,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { SettingsProvider } from "@/contexts/SettingsContext";
 
 
 const cairo = Cairo({
@@ -28,8 +29,9 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className={`${cairo.variable} font-cairo bg-white text-gray-900 antialiased`}>
         <AuthProvider>
-          <CartProvider>
-            <Navbar />
+          <SettingsProvider>
+            <CartProvider>
+              <Navbar />
             <main className="min-h-screen pt-16">
               {children}
             </main>
@@ -55,7 +57,8 @@ export default function RootLayout({
                 },
               }}
             />
-          </CartProvider>
+            </CartProvider>
+          </SettingsProvider>
         </AuthProvider>
       </body>
     </html>

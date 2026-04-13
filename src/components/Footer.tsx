@@ -1,28 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, ShieldCheck, Truck, Globe, Share2, MessageCircle, Smartphone, ExternalLink } from 'lucide-react';
-import { getStoreSettings, StoreSettings, getDeveloperInfo, Developer } from '@/lib/firestore';
+import { useSettings } from '@/contexts/SettingsContext';
 
 export default function Footer() {
-  const [settings, setSettings] = useState<StoreSettings | null>(null);
-  const [developer, setDeveloper] = useState<Developer | null>(null);
+  const { settings, developer, loading } = useSettings();
 
-  useEffect(() => {
-    async function loadData() {
-      const [s, d] = await Promise.all([
-        getStoreSettings(),
-        getDeveloperInfo()
-      ]);
-      setSettings(s as StoreSettings);
-      setDeveloper(d);
-    }
-    loadData();
-  }, []);
-
-  if (!settings) return null;
+  if (loading || !settings) return null;
 
   const logoToUse = settings.app_logo || settings.logoUrl;
 

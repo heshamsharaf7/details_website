@@ -1,25 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useCart } from '@/contexts/CartContext';
 import { ShoppingCart, User, Bell, Package, Home } from 'lucide-react';
-import { getStoreSettings, StoreSettings } from '@/lib/firestore';
+import { useSettings } from '@/contexts/SettingsContext';
 import Image from 'next/image';
 
 export default function Navbar() {
   const { user } = useAuth();
   const { totalItems, selectedCurrency, setCurrency } = useCart();
-  const [settings, setSettings] = useState<StoreSettings | null>(null);
-
-  useEffect(() => {
-    async function loadSettings() {
-      const s = await getStoreSettings();
-      setSettings(s);
-    }
-    loadSettings();
-  }, []);
+  const { settings } = useSettings();
 
   return (
     <nav className="fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-lg z-50 border-b border-gray-100 px-4 md:px-8">

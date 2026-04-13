@@ -5,24 +5,16 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { getStoreSettings, StoreSettings } from '@/lib/firestore';
+import { useSettings } from '@/contexts/SettingsContext';
 import Image from 'next/image';
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [settings, setSettings] = useState<StoreSettings | null>(null);
+  const { settings } = useSettings();
   
   const { loginWithGoogle, user } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    async function loadSettings() {
-      const s = await getStoreSettings();
-      setSettings(s);
-    }
-    loadSettings();
-  }, []);
 
   // Redirect if already logged in
   useEffect(() => {
